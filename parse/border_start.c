@@ -6,7 +6,7 @@
 /*   By: dsamain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:38:00 by dsamain           #+#    #+#             */
-/*   Updated: 2022/05/01 22:08:57 by dsamain          ###   ########.fr       */
+/*   Updated: 2022/07/01 22:20:25 by dsamain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	dfs(t_data *data, int i, int j)
 {
 	if (data->map.grid[i][j] != -1)
 		return (1);
-	if (i == 0 || i == data->map.n-1 || j == 0 || j == data->map.m-1)
+	if (i == 0 || i == data->map.n - 1 || j == 0 || j == data->map.m - 1)
 		return (0);
 	data->map.grid[i][j] = 0;
 	if (!dfs(data, i + 1, j) || !dfs(data, i - 1, j)

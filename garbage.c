@@ -6,7 +6,7 @@
 /*   By: dsamain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:13:43 by dsamain           #+#    #+#             */
-/*   Updated: 2022/05/03 17:59:46 by dsamain          ###   ########.fr       */
+/*   Updated: 2022/06/29 10:43:18 by dsamain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,9 @@ int	g_push(t_node **garbage, void *elem)
 	return (1);
 }
 
-void	g_print(t_node *garbage)
-{
-	t_node	*cur;
-	int		idx;
-
-	idx = 0;
-	if (!garbage)
-		return ;
-	cur = garbage;
-	while (cur && cur->elem)
-	{
-		printf("%p ", cur->elem);
-		cur = cur->next;
-	}
-	printf("\n");
-}
-
 void	clear_node(t_node *garbage)
 {
-	t_node *nxt;
+	t_node	*nxt;
 
 	if (!garbage)
 		return ;
@@ -78,8 +61,6 @@ int	g_clear(t_node **garbage, char *msg)
 		printf("%s\n", msg);
 	if (!garbage)
 		return (0);
-	printf("| clearing : ");
-	//g_print(*garbage);
 	clear_node(*garbage);
 	*garbage = NULL;
 	return (0);

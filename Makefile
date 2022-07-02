@@ -1,44 +1,34 @@
-//INC=/usr/include
 
-
-//INCLIB=$(INC)/../lib
-
-
-NAME= cub3d
-SRC = main.c mlx_utils.c utils.c render.c ray_cast.c hook.c action.c init.c garbage.c \
+SRC = main.c game.c mlx_utils.c render.c raycast.c raycast2.c draw.c hook.c action.c action2.c init.c garbage.c \
 		parse/parse.c parse/parse_map.c parse/parse_info.c parse/border_start.c \
-		portal.c
+		utils.c utils2.c portal.c minimap.c
 
 OBJ = $(SRC:%.c=%.o)
 
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
-#FLAGS = -Wall -Wextra -Werror
+OBJ_B = $(SRC:%.c=%.o)
 
-CC = gcc $(FLAGS)
+CC = gcc # $(FLAGS)
+
+MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+MLX = libmlx.dylib
+# FLAGS = -Wall -Wextra -Werror
+
+NAME = cub3d
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) -o $(NAME) $(OBJ) $(MLXFLAGS)
+$(NAME): $(MLX) $(OBJ)
+	$(CC) -O3 -I. $(MLX) -o $(NAME) $(OBJ) $(MLXFLAGS)
 
-show:
-	@printf "UNAME		: $(UNAME)\n"
-	@printf "NAME  		: $(NAME)\n"
-	@printf "CC		: $(CC)\n"
-	@printf "CFLAGS		: $(CFLAGS)\n"
-	@printf "LFLAGS		: $(LFLAGS)\n"
-	@printf "SRC		:\n	$(SRC)\n"
-	@printf "OBJ		:\n	$(OBJ)\n"
+$(MLX):
+	@$(MAKE) -C mlx
+	@mv mlx/$(MLX) .
 
 clean:
+	@$(MAKE) -C mlx clean
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME) $(NAME_B)
+	rm -f $(NAME) $(MLX)
 
-re: clean all
-
-bonus : $(NAME_B)
-
-$(NAME_B) : $(OBJ_B)
-	$(CC) -o $(NAME_B) $(OBJ_B) $(MLXFLAGS)
+re: fclean all

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsamain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/13 12:35:47 by dsamain           #+#    #+#             */
-/*   Updated: 2022/02/13 12:36:31dsamain          ###   ########.fr       */
+/*   Created: 2022/07/01 22:10:35 by dsamain           #+#    #+#             */
+/*   Updated: 2022/07/01 22:19:24 by dsamain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	alloc_map(t_data *data)
 	data->map.grid = ft_malloc(data, sizeof(int *) * data->map.n);
 	if (!data->map.grid)
 		return (0);
-	i = -1;		
+	i = -1;
 	while (++i < data->map.n)
 	{
 		data->map.grid[i] = ft_malloc(data, sizeof(int) * data->map.m);
@@ -82,8 +82,6 @@ int	get_orientation(char c)
 
 int	parse_map(t_data *data, char **raw_map)
 {
-	int	cur;
-	int	mx;
 	int	i;
 	int	j;
 	int	idx;

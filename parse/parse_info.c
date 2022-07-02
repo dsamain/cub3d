@@ -6,7 +6,7 @@
 /*   By: dsamain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 12:31:51 by dsamain           #+#    #+#             */
-/*   Updated: 2022/05/01 22:08:53 by dsamain          ###   ########.fr       */
+/*   Updated: 2022/07/01 22:39:19 by dsamain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 //5:S
 //6:W
 
-int	get_id(t_data *data, char *rm)
+int	get_id(char *rm)
 {
 	if (rm[0] == '\n')
 		return (0);
@@ -62,10 +62,9 @@ int	parse_texture_path(t_data *data, char **dest, char **raw_map)
 	return (1);
 }
 
-int	parse_rgb(t_data *data, int *dest, char **raw_map)
+int	parse_rgb(int *dest, char **raw_map)
 {
 	int	idx;
-	int	cur;
 
 	*raw_map += 2;
 	if (dest[0] != -1)
@@ -98,7 +97,7 @@ int	get_info(t_data *data, char **raw_map)
 	cnt = 0;
 	while (cnt < 6)
 	{
-		id = get_id(data, *raw_map);
+		id = get_id(*raw_map);
 		if (id < 0)
 			return (0);
 		if (!id)
@@ -110,7 +109,7 @@ int	get_info(t_data *data, char **raw_map)
 			if (!parse_texture_path(data, &data->map.texture[id - 3], raw_map))
 				return (0);
 		if (id > 0 && id < 3)
-			if (!parse_rgb(data, data->map.col[id - 1], raw_map))
+			if (!parse_rgb(data->map.col[id - 1], raw_map))
 				return (0);
 		cnt++;
 	}
